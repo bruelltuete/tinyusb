@@ -139,6 +139,12 @@ static inline osal_queue_t osal_queue_create(osal_queue_def_t* qdef)
   return (osal_queue_t) qdef;
 }
 
+static inline void osal_queue_destroy(osal_queue_t qdef)
+{
+  tu_fifo_clear(&qdef->ff);
+  critical_section_deinit(&qdef->critsec);
+}
+
 static inline bool osal_queue_receive(osal_queue_t qhdl, void* data)
 {
   // TODO: revisit... docs say that mutexes are never used from IRQ context,

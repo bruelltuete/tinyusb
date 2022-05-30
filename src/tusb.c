@@ -35,6 +35,16 @@
 #include "device/usbd_pvt.h"
 #endif
 
+void tusb_deinit(void)
+{
+#if TUSB_OPT_DEVICE_ENABLED
+  tud_deinit(TUD_OPT_RHPORT);
+#endif
+#if TUSB_OPT_HOST_ENABLED
+#error "Not implemented"
+#endif
+}
+
 bool tusb_init(void)
 {
 #if TUSB_OPT_DEVICE_ENABLED

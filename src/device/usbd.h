@@ -40,6 +40,8 @@ extern "C" {
 // Init device stack
 bool tud_init (uint8_t rhport);
 
+bool tud_deinit(uint8_t rhport);
+
 // Check if device stack is already initialized
 bool tud_inited(void);
 

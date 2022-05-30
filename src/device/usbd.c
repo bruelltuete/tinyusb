@@ -402,6 +402,22 @@ bool tud_inited(void)
   return _usbd_initialized;
 }
 
+#if CFG_TUSB_OS == OPT_OS_PICO
+bool tud_deinit(uint8_t rhport)
+{
+  dcd_int_disable(rhport);
+  // pico's dcd_init() does not keep has-been-inited state.
+
+  // FIXME: tested for pico only
+  _usbd_mutex = NULL;
+  osal_queue_destroy(_usbd_q);
+
+  _usbd_initialized = false;
+}
+#else
+#error "Not implemented!"
+#endif
+
 bool tud_init (uint8_t rhport)
 {
   // skip if already initialized
