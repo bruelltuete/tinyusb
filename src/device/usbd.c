@@ -413,6 +413,8 @@ bool tud_deinit(uint8_t rhport)
   osal_queue_destroy(_usbd_q);
 
   _usbd_initialized = false;
+
+  return true;
 }
 #else
 #error "Not implemented!"
